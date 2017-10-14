@@ -1,0 +1,11 @@
+{
+  "name": "howtohtml",
+  "scripts": {
+    "start": "node signaler.js"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "websocket": "1.0.x",
+    "node-static": "0.7.x"
+  }
+}
