@@ -39,7 +39,7 @@ class SignUpComponent extends React.Component {
   render() {
     return (
       <div className="sigin">
-        <h1>Signin</h1>
+        <h1>SignUp</h1>
          {
           this.state.errorMsg && <p>{this.state.errorMsg}</p>
         }

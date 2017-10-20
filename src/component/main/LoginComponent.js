@@ -32,7 +32,7 @@ class LoginComponent extends React.Component {
   render() {
     return (
       <div className="login">
-        <h1>Login</h1>
+        <h1>LogIn</h1>
         {
           this.state.errorMsg && <p>{this.state.errorMsg}</p>
         }
