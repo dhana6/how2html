@@ -1,8 +1,15 @@
-function getElement(selector) {
-    return document.querySelector(selector);
+// function getElement(selector) {
+//     return document.querySelector(selector);
+// }
+
+function getElement(el) {
+ return  document.getElementsByClassName(el)[0];
+}
+function getElementId(el){
+    return document.getElementById(el);
 }
 
-var main = getElement(".main");
+var main = getElement('.main');
 
 function getRandomColor() {
     var letters = "0123456789ABCDEF".split("");
@@ -47,41 +54,41 @@ function addNewMessage(args) {
     }
 }
 
-main.querySelector("#your-name").onkeyup = function(e) {
+main.getElementId("#your-name").onkeyup = function(e) {
     if (e.keyCode != 13) return;
-    main.querySelector("#continue").onclick();
+    main.getElementId("#continue").onclick();
 };
 
-main.querySelector("#room-name").onkeyup = function(e) {
+main.getElementId("#room-name").onkeyup = function(e) {
     if (e.keyCode != 13) return;
-    main.querySelector("#continue").onclick();
+    main.getElementId("#continue").onclick();
 };
 
-main.querySelector("#room-name").value = (Math.random() * 1000)
+main.getElementId("#room-name").value = (Math.random() * 1000)
     .toString()
     .replace(".", "");
 if (localStorage.getItem("roomname")) {
-    main.querySelector("#room-name").value = localStorage.getItem("roomname");
+    main.getElementId("#room-name").value = localStorage.getItem("roomname");
 }
 
-main.querySelector("#room-name").onkeyup = function() {
-    localStorage.setItem("roomname", main.querySelector("#room-name").value);
+main.getElementId("#room-name").onkeyup = function() {
+    localStorage.setItem("roomname", main.getElementId("#room-name").value);
 };
-
-main.querySelector("#continue").onclick = function() {
-    var yourName = this.parentNode.querySelector("#your-name");
-    var roomName = this.parentNode.querySelector("#room-name");
-
+/*edit content*/
+main.getElementId("#continue").onclick = function() {
+    var yourName = this.parentNode.getElementId("#your-name");
+    var roomName = this.parentNode.getElementId("#room-name");
     if (!roomName.value || !roomName.value.length) {
         roomName.focus();
         return alert("Your MUST Enter Room Name!");
     }
 
-    main.querySelector("#room-name").onkeyup();
+    main.getElementId("#room-name").onkeyup();
 
     yourName.disabled = roomName.disabled = this.disabled = true;
 
     var username = yourName.value || "Anonymous";
+   
 
     rtcMultiConnection.extra = {
         username: username,
@@ -94,8 +101,13 @@ main.querySelector("#continue").onclick = function() {
         userinfo: '<img src="images/action-needed.png">'
     });
 
-    var roomid = main.querySelector("#room-name").value;
+    var roomid = main.getElementId("#room-name").value;
     rtcMultiConnection.channel = roomid;
+
+    console.log(username)
+    console.log(roomid)
+    var firebaseRef = firebase.database().ref();
+    console.log(firebaseRef);
 
     var websocket = new WebSocket(SIGNALING_SERVER);
     websocket.onmessage = function(event) {

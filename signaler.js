@@ -1,16 +1,16 @@
 var port = 12034;
 
-var fs = require("fs");
 
 function resolveURL(url) {
     var isWin = !!process.platform.match(/^win/);
     if (!isWin) return url;
     return url.replace(/\//g, "\\");
 }
+var fs = require("fs");
 
 var _static = require("node-static");
-var file = new _static.Server("./public");
-
+var file = new _static.Server("./");
+console.log(file)
 var http = require("http")
     .createServer(function(request, response) {
         request

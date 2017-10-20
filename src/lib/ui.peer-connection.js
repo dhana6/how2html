@@ -241,7 +241,7 @@ rtcMultiConnection.onstream = function(e) {
 
         addNewMessage({
             header: e.extra.username,
-            message: e.extra.username + " enabled webcam.",
+            message: e.extra.username + " enabled screensharing.",
             userinfo:
                 '<video id="' +
                 e.userid +
