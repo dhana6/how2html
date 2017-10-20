@@ -11,90 +11,85 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-    display: block;
+   display: block;
 }
 body {
-    line-height: 1;
+   line-height: 1;
 }
 ol, ul {
-    list-style: none;
+   list-style: none;
 }
 blockquote, q {
-    quotes: none;
+   quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
-    content: none;
+   content: '';
+   content: none;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 
 /*custom css*/
 
 /*set container width*/
 .container{
-    width: 1300px;
-    padding: 0px;
+   width: 1300px;
+   padding: 0px;
 }
 
-/*header component*/
-nav > ol {
-    display: inline-flex;
-    padding: 20px;
-}
-ol > li {
-    margin: 10px;
-}
 .header {
-    border-bottom: 1px solid red;
+   padding: 20px 0px;
+   box-shadow: 0 0 1px 1px hsla(0,0%,7%,.1), 0 3px 1px 0 hsla(0,0%,7%,.1);
 }
 /*footer component*/
 .footercontent {
-    padding: 20px;
-    text-align: center;
+   padding: 20px;
+   text-align: center;
 }
 .footer{
-        border-top: 1px solid red;
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 /*main component*/
 .article {
-    display: flex;
+   display: flex;
+   flex-wrap: nowrap;
+   height: 75vh;
 }
 .main {
-    width: 1000px;
-    text-align: center;
+   width: 1000px;
+   text-align: center;
 }
 .joinbtn{
    position: relative;
-    top: 200px;
+   top: 200px;
 }
 .startbtn{
-     position: relative;
-    top: 200px;
+   position: relative;
+   top: 200px;
 }
 .pausebtn{
-    float: left;
-    position: relative;
-    top: 400px;
+   float: left;
+   position: relative;
+   top: 400px;
 }
 .stopbtn{
-    float: right;
-    position: relative;
-    top: 400px;
+   float: right;
+   position: relative;
+   top: 400px;
 }
 .buttons > button
 {
@@ -102,19 +97,106 @@ margin: 10px;
 }
 /*chat component*/
 .chatwindow {
-    border-left: 1px solid red; 
-    width: 300px;
-    height: 500px;
+   border-left:1px solid #666;
+   width: 300px;
+   text-align: center;
 }
 textarea {
-    border-top: 1px solid red;
-    width: 100%;
-    resize: none;
-    padding: .4em .8em;
-    font-size: inherit;
-    font-family: inherit;
-    /*padding-right: 177px;*/
-    background: transparent;
-    top: 455px;
-    position: relative;
+   width: 100%;
+   resize: none;
+   padding: .4em .8em;
+   border:1px solid transparent;
+   background-color: #eee;
+   border-radius: 0px;
+   position: relative;
+   top: 431px;
+}
+/*logincomp*/
+.login{
+   position: relative;
+   opacity: 1;
+   width: 50%;
+   animation: log .5s linear;
+}
+/*signincomp*/
+.sigin{
+   position: relative;
+   opacity: 1;
+   width: 50%;
+   animation: sign .5s linear;
+}
+@keyframes log {
+   0%   {right:10px;opacity: 0;}
+   100% {right:0px;opacity: 1;}
+}
+@keyframes sign {
+   0%   {left:10px;opacity: 0;}
+   100% {left:0px;opacity: 1;}
+}
+/*new*/
+.form.frm-group {
+   padding: 20px;
+}
+.sigin button,.login button{
+   margin: 10px;
+}
+.sigin label,.login label{
+   margin: 10px;
+   font-size: 16px;
+   color:#666;
+}
+body {
+   font-family: 'Lato', sans-serif;
+   font-size: 14px;
+   color: #666;
+}
+.logo{
+   padding-left: 10px;
+   height: 50px;
+   width: 50px;
+}
+h1{
+   color:#1ABC9C ;
+   font-weight: 600;
+   text-align: center;
+   font-size: 24px;
+   padding: 10px 5px;
+}
+.btn-primary{
+   background: transparent;
+   border: 1px solid #1ABC9C ;
+   color: #1ABC9C ;
+   transition: all .2s ease-in-out;
+}
+.btn-primary:focus, .btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:link{
+   background:#1ABC9C ;
+   border: 1px solid #1ABC9C ;
+   border-radius: 30px;
+}
+.form-control{
+   transition: all .2s ease-in-out;
+   border: 1px solid #1ABC9C ;
+}
+.form-control:focus{
+   border: 1px solid #1ABC9C ;
+   box-shadow: inset 1px 1px 1px #1ABC9C ;
+}
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+   outline:0px !important;
+   appearance:none;
+}
+.chat::-webkit-input-placeholder {
+   color: #1ABC9C ;
 }

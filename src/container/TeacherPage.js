@@ -1,8 +1,7 @@
 import React from "react";
-import HeaderComponent from "./header/HeaderComponent";
-import FooterComponent from "./footer/FooterComponent";
-import TeacherMainComponent from "./main/TeacherMainComponent";
-import ChatComponent from "./chat/ChatComponent";
+
+import TeacherMainComponent from "../component/main/TeacherMainComponent";
+import ChatComponent from "../component/chat/ChatComponent";
 
 class TeacherPage extends React.Component {
   constructor() {
@@ -12,14 +11,12 @@ class TeacherPage extends React.Component {
   render() {
     return (
       <div className="teacherPage">
-        <HeaderComponent />
         <div className="container">
           <div className="article">
             <TeacherMainComponent />
             <ChatComponent />
           </div>
         </div>
-        <FooterComponent />
       </div>
     );
   }
