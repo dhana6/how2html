@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Timer from './Timer'
+// import Timer from './Timer'
 
  
 class TeacherMainComponent extends React.Component {
@@ -24,7 +24,6 @@ class TeacherMainComponent extends React.Component {
           Start Session
         </button>
         <div className="buttons" ref="buttons" style={{ display: "none" }}>
-        <Timer />
           <button className="btn btn-primary pausebtn">Pause Session</button>
           <button className="btn btn-primary stopbtn">Stop Session</button>
         </div>
