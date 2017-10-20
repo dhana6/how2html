@@ -8,15 +8,20 @@ class LoginComponent extends React.Component {
   render() {
     return (
       <div className="login">
-        <div class="panel-body">
-          <div class="form frm-group">
-           <label for="email">Email:</label>
-           <input id="email" type="text" name="input" class="form-control" placeholder="Email" />
-            <label for="password">PassWord:</label>
-           <input id="password" type="password" name="input" class="form-control" placeholder="password" />
-          
-          </div>
-   </div>
+          <form >
+          <div className="form frm-group">
+           <label>Email:</label>
+           <input id="email" type="text" name="input" className="form-control" placeholder="Email" />
+            <label>PassWord:</label>
+           <input id="password" type="password" name="input" className="form-control" placeholder="password" />
+           <button type="submit" name="" id="login"  className="btn btn-primary">
+           Submit
+           </button>
+            <button type="reset" name="" id="reset"  className="btn btn-primary">
+           Reset
+           </button>
+           </div>
+          </form>
       </div>
     );
   }
