@@ -1,0 +1,41 @@
+{
+	messages:{
+	{
+	username: "dhana",
+	profileImage:"",
+	messageText:"Hai"
+	}
+	}
+}
+
+{
+	users:{
+		userId: {
+			userName,
+			profileImg
+		},
+		userId: {
+			userName,
+			profileImg
+		},
+		userId: {
+			userName,
+			profileImg
+		}
+	},
+	messages: [
+		{
+			txt: 'Hello!',
+			userId:,
+			time
+		},
+		{
+			txt: 'Hello!',
+			userId:
+		},
+		{
+			txt: 'Hello!',
+			userId:
+		}
+	]
+}

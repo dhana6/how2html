@@ -1,18 +1,19 @@
 import React from "react";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Firebase, { auth } from "../lib/Firebase";
 
-import SignUpComponent from "../component/main/SignUpComponent"
-import LoginComponent from "../component/main/LoginComponent";
+import SignUpComponent from "../components/main/SignUpComponent";
+import LoginComponent from "../components/main/LoginComponent";
 
 class HomePage extends React.Component {
   constructor() {
     super();
+    this.user = null;
     this.state = {
-      issignedUp: false,
       isLoggedIn: false,
-      role: "student"
+      role: "student",
+      errorMsg: ""
     };
   }
 
@@ -20,36 +21,53 @@ class HomePage extends React.Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         var displayName = user.displayName;
+        console.log(displayName);
         var email = user.email;
-        var uid = user.uid;
-        // this.setState({ isLoggedIn: true });
+        var pass = user.pass;
+        var image = user.photoURL;
+        const ref = Firebase.database()
+          .ref()
+          .child("users")
+          .push();
+        ref.set({
+          userName: displayName,
+          email: email,
+          profileImage: image
+        });
+        this.setState({ isLoggedIn: true, issignedUp: true });
       } else {
-        // this.setState({ isLoggedIn: false });
+        this.setState({ isLoggedIn: false, issignedUp: false });
       }
     });
     console.dir(Firebase.auth());
   }
 
-  onRoleChange = (e) => {
+  onRoleChange = e => {
     this.setState({ role: e.target.value });
-  }
+  };
 
-  signUp = (email, pass) => {
+  signUp = (email, pass, name) => {
     Firebase.auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(user => {
+        console.log("Rethna");
+        console.dir(user);
+        this.user = user;
         user.updateProfile({
-          displayName: name
+          displayName: name,
+          photoURL:
+            "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y"
         });
       })
-      .then(userInfo => {
-        console.dir(userInfo);
+      .then(() => {
         alert("signup sucessfully");
+        console.log(this.user.displayName + "?");
+        this.setState({ isLoggedIn: true });
       })
       .catch(e => {
-        alert(e.message, "signup");
+        console.log(this.user.displayName + "??");
+        this.setState({ isLoggedIn: false, errorMsg: e.message });
       });
-    this.setState({ issignedUp: true });
   };
 
   signIn = (email, pass) => {
@@ -58,28 +76,21 @@ class HomePage extends React.Component {
       .then(userInfo => {
         console.log(userInfo);
         alert("Login Successfully");
-        this.redirectUrl(userInfo);
+        this.setState({ isLoggedIn: true });
       })
       .catch(e => {
         console.dir(e);
-        alert(e.message, "signin");
+        this.setState({ isLoggedIn: false, errorMsg: e.message });
       });
-    this.setState({ isLoggedIn: true });
   };
 
-
   render() {
-    const {issignedUp} = this.state;
-    if(issignedUp){
-        return <Redirect to = "/student" />
-    }
-
-    const {isLoggedIn, role} = this.state;
-    if(isLoggedIn){
-      if(role == "teacher"){
-        return <Redirect to = "/teacher" />
-      }else{
-        return <Redirect to = "/student" />
+    const { isLoggedIn, role } = this.state;
+    if (isLoggedIn) {
+      if (role == "teacher") {
+        return <Redirect to="/teacher" />;
+      } else {
+        return <Redirect to="/student" />;
       }
     }
 
@@ -87,8 +98,16 @@ class HomePage extends React.Component {
       <div className="homePage">
         <div className="container">
           <div className="article">
-           <SignUpComponent signUp = {this.signUp} />
-           <LoginComponent role = {this.state.role} onRoleChange = {this.onRoleChange} signIn = {this.signIn} />
+            <SignUpComponent
+              signUp={this.signUp}
+              errorMsg={this.state.errorMsg}
+            />
+            <LoginComponent
+              role={this.state.role}
+              errorMsg={this.state.errorMsg}
+              onRoleChange={this.onRoleChange}
+              signIn={this.signIn}
+            />
           </div>
         </div>
       </div>

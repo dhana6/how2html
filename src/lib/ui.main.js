@@ -2,8 +2,7 @@ function getElement(selector) {
     return document.querySelector(selector);
 }
 
-
-var main = getElement('.main');
+var main = getElement(".main");
 
 function getRandomColor() {
     var letters = "0123456789ABCDEF".split("");
@@ -82,7 +81,6 @@ main.querySelector("#continue").onclick = function() {
     yourName.disabled = roomName.disabled = this.disabled = true;
 
     var username = yourName.value || "Anonymous";
-   
 
     rtcMultiConnection.extra = {
         username: username,
@@ -98,8 +96,8 @@ main.querySelector("#continue").onclick = function() {
     var roomid = main.querySelector("#room-name").value;
     rtcMultiConnection.channel = roomid;
 
-    console.log(username)
-    console.log(roomid)
+    console.log(username);
+    console.log(roomid);
     var firebaseRef = firebase.database().ref();
     console.log(firebaseRef);
 

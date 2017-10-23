@@ -3,12 +3,11 @@ import React from "react";
 class SignUpComponent extends React.Component {
   constructor(props) {
     super(props);
-   this.state = {
-      errorMsg:''
-    }
+    this.state = {
+      errorMsg: ""
+    };
   }
 
-  
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -21,31 +20,23 @@ class SignUpComponent extends React.Component {
     let pass = this.password.value.trim();
     let exp = this.exp.value.trim();
     if (name == "" || email == "" || pass == "" || exp == "") {
-      this.setState({errorMsg: "Please fill all Fields."});
-      return;
-    }
-    if(pass.length != 6){
-      this.setState({errorMsg: "Password should be at least 6 characters"});
+      this.setState({ errorMsg: "Please fill all Fields." });
       return;
     }
     if (!this.validateEmail(email)) {
-      this.setState({errorMsg: "Please enter a valid Email id."});
+      this.setState({ errorMsg: "Please enter a valid Email id." });
       return;
     }
-    this.props.signUp(email, pass);
-   
+    this.props.signUp(email, pass, name);
   };
 
   render() {
     return (
       <div className="sigin">
-        <h1>SignUp</h1>
-         {
-          this.state.errorMsg && <p>{this.state.errorMsg}</p>
-        }
+        {console.log(this.state.name)}
         <form>
+          <h1>SignUp</h1>
           <div className="form frm-group">
-            <label>Name:</label>
             <input
               id="username"
               type="text"
@@ -54,7 +45,6 @@ class SignUpComponent extends React.Component {
               className="form-control"
               placeholder="Name"
             />
-            <label>Email:</label>
             <input
               id="email"
               type="text"
@@ -63,7 +53,6 @@ class SignUpComponent extends React.Component {
               className="form-control"
               placeholder="Email"
             />
-            <label>PassWord:</label>
             <input
               id="password"
               type="password"
@@ -72,7 +61,6 @@ class SignUpComponent extends React.Component {
               className="form-control"
               placeholder="password"
             />
-            <label>No.of.days.Exp:</label>
             <input
               id="exp"
               type="text"
@@ -94,6 +82,9 @@ class SignUpComponent extends React.Component {
               Reset
             </button>
           </div>
+          {(this.state.errorMsg && <p>{this.state.errorMsg}</p>) || (
+            <p>{this.props.errorMsg}</p>
+          )}
         </form>
       </div>
     );

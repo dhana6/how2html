@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Timer from './Timer'
 
- 
 class TeacherMainComponent extends React.Component {
   constructor() {
     super();
@@ -33,4 +31,3 @@ class TeacherMainComponent extends React.Component {
 }
 
 export default TeacherMainComponent;
-

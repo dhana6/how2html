@@ -1,46 +1,47 @@
 var path = require("path");
 var webpack = require("webpack");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	entry: './src',
+	entry: "./src",
 	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: 'bundle.js'
+		path: path.resolve(__dirname, "build"),
+		filename: "bundle.js"
 	},
-	module:{
-		rules:[
+	module: {
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node-modules/,
-				use: ['babel-loader']
+				use: ["babel-loader"]
 			},
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [{
-							loader: 'css-loader',
+					fallback: "style-loader",
+					use: [
+						{
+							loader: "css-loader",
 							options: {
 								modules: true,
-								localIdentName: '[name]_[local]__[hash:base64:5]'
+								localIdentName: "[name]_[local]__[hash:base64:5]"
 							}
 						}
-
 					]
 				})
 			}
 		]
 	},
-	plugins:[new HtmlWebpackPlugin({
-			title:'HOW2HTML',
-			minify:{
-				collapseWhitespace:true
+	plugins: [
+		new HtmlWebpackPlugin({
+			title: "HOW2HTML",
+			minify: {
+				collapseWhitespace: true
 			},
-			hash:true,
-			template:'./index.html'
+			hash: true,
+			template: "./index.html"
 		}),
-		new ExtractTextPlugin('styles.css')
+		new ExtractTextPlugin("styles.css")
 	]
-}
+};

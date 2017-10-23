@@ -1,14 +1,14 @@
 import React from "react";
-
+import Firebase, { auth } from "../../lib/Firebase";
 
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMsg:''
-    }
+      errorMsg: ""
+    };
   }
-  
+
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -18,27 +18,23 @@ class LoginComponent extends React.Component {
     e.preventDefault();
     let email = this.emailid.value.trim();
     let pass = this.password.value.trim();
-    if (email == "" || pass == "" ) {
-      this.setState({errorMsg: "Please fill all Fields."});
+    if (email == "" || pass == "") {
+      this.setState({ errorMsg: "Please fill all Fields." });
       return;
     }
     if (!this.validateEmail(email)) {
-      this.setState({errorMsg: "Please enter a valid Email id."});
+      this.setState({ errorMsg: "Please enter a valid Email id." });
       return;
     }
     this.props.signIn(email, pass);
-  }
+  };
 
   render() {
     return (
       <div className="login">
-        <h1>LogIn</h1>
-        {
-          this.state.errorMsg && <p>{this.state.errorMsg}</p>
-        }
         <form>
+          <h1>LogIn</h1>
           <div className="form frm-group">
-            <label>Email:</label>
             <input
               id="email"
               type="text"
@@ -47,7 +43,6 @@ class LoginComponent extends React.Component {
               className="form-control"
               placeholder="Email"
             />
-            <label>PassWord:</label>
             <input
               id="password"
               type="password"
@@ -56,10 +51,9 @@ class LoginComponent extends React.Component {
               className="form-control"
               placeholder="password"
             />
-            <label>select Category:</label>
             <select
               onChange={this.props.onRoleChange}
-              value = {this.props.role}
+              value={this.props.role}
               className="form-control"
             >
               <option value="teacher">Teacher</option>
@@ -78,6 +72,9 @@ class LoginComponent extends React.Component {
               Reset
             </button>
           </div>
+          {(this.state.errorMsg && <p>{this.state.errorMsg}</p>) || (
+            <p>{this.props.errorMsg}</p>
+          )}
         </form>
       </div>
     );
